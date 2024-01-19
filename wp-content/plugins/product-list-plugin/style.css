@@ -1,0 +1,8 @@
+/* Add your styles here */
+.product-list {
+	list-style: none;
+}
+
+.product-item {
+	margin-bottom: 10px;
+}
