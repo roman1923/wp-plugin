@@ -10,7 +10,7 @@ $products = get_products();
         ?>
         <li class="product-item" id="<?php echo esc_attr($product); ?>">
             <?php echo esc_html($product); ?>
-            <button class="delete-product" data-product="<?php echo esc_attr($product); ?>">Delete</button>
+            <button class="delete-product" data-product="<?php echo esc_attr($product); ?>">+</button>
         </li>
         <?php
     }

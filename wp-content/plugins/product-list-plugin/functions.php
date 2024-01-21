@@ -20,8 +20,10 @@ if (!function_exists('get_products')) {
 }
 
 // Function to delete a product from the file
-if (!function_exists('delete_product_from_file')) {
-    function delete_product_from_file($product_name) {
+if (!function_exists('delete_product_from_file_and_db')) {
+    function delete_product_from_file_and_db($product_name) {
+        global $wpdb;
+
         $file_path = ABSPATH . 'data/products.txt';
 
         $products = get_products();
@@ -35,12 +37,25 @@ if (!function_exists('delete_product_from_file')) {
             // Save the updated product list to the file
             $write_result = file_put_contents($file_path, implode("\n", $products));
 
-            return $write_result !== false;
+            // Delete the product from the database
+            $deleted_rows = $wpdb->delete($wpdb->prefix . 'product_list', array('Name' => $product_name));
+
+            if ($deleted_rows === false) {
+                // Log or print the database error for debugging
+                error_log('Database Error: ' . $wpdb->last_error);
+                error_log('SQL Query: ' . $wpdb->last_query);
+            } else {
+                error_log('Deleted rows: ' . $deleted_rows);
+            }
+
+            return $write_result !== false && $deleted_rows !== false;
         }
 
         return false; // Product not found
     }
 }
+
+
 
 
 ?>

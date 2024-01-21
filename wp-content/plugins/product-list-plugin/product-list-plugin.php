@@ -35,7 +35,7 @@ function delete_product() {
 
    if (isset($_POST['product_name'])) {
        $product_name = sanitize_text_field($_POST['product_name']);
-       $result = delete_product_from_file($product_name);
+       $result = delete_product_from_file_and_db($product_name);
 
        if ($result) {
            wp_send_json_success(array('message' => 'Product deleted successfully'));

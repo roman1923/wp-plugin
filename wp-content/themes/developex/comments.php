@@ -49,14 +49,7 @@ if ( post_password_required() ) {
 		<?php the_comments_navigation(); ?>
 
 		<ol class="comment-list">
-			<?php
-			wp_list_comments(
-				array(
-					'style'      => 'ol',
-					'short_ping' => true,
-				)
-			);
-			?>
+
 		</ol><!-- .comment-list -->
 
 		<?php
@@ -71,7 +64,7 @@ if ( post_password_required() ) {
 
 	endif; // Check for have_comments().
 
-	comment_form();
+
 	?>
 
 </div><!-- #comments -->
